@@ -22,5 +22,7 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
 
-
 // Setup Server
+const port = 8000;
+// Using console.log in the callback function test my server is running
+const server = app.listen(port, () => console.log(`Server running on localhost: ${port}`));

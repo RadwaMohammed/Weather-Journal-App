@@ -26,3 +26,6 @@ app.use(express.static('website'));
 const port = 8000;
 // Using console.log in the callback function test my server is running
 const server = app.listen(port, () => console.log(`Server running on localhost: ${port}`));
+
+// Create GET route that returns projectData object
+app.get('/all', (req, res) => res.send(projectData));

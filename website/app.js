@@ -20,3 +20,12 @@ const getData = async (baseURL, zipCode, apikey) => {
         console.log("error", error);
     }
 };
+
+// Function to handle click event
+const generateData = e => {
+    e.preventDefault();
+};
+
+// Create an event listener (click) for 'Generate' button
+document.getElementById('generate').addEventListener('click', generateData);
+

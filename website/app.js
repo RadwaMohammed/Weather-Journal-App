@@ -90,6 +90,9 @@ const generateData = e => {
             });
         }) // then Update UI elements 
         .then(() => updateUI('/all'))
+    
+    // Reset the form
+    document.getElementById('myForm').reset();
 };
 
 // Create an event listener (click) for 'Generate' button

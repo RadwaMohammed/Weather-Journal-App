@@ -32,7 +32,7 @@ app.get('/all', (req, res) => res.send(projectData));
 
 // Create POST route that adds incoming data to projectData object
 app.post('/add', (req, res) => {
-    // Receiving temperature, date and userr response from the request body
+    // Receiving temperature, date and user response from the request body
     const {temperature, date, userResponse} = req.body;
     // Add incoming data to projectData object
     projectData.temperature = temperature;

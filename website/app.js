@@ -43,6 +43,20 @@ const postData = async (url = '', data = {}) => {
 // Function to handle click event
 const generateData = e => {
     e.preventDefault();
+    // Value that user enter to zip input field
+    const zipCode = document.getElementById('zip').value;
+    // Value that user enter to feelings input field
+    const userRes = document.getElementById('feelings').value;
+   // Get data from OpenWeatherMap API
+    getData(baseURL, zipCode, apikey)
+        .then(userData => {
+            // Make a POST request to add the API data and data entered by the user
+            postData('/add', { 
+                date: newDate, 
+                temperature: userData.main.temp, 
+                userResponse: userRes
+            });
+        })
 };
 
 // Create an event listener (click) for 'Generate' button

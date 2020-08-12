@@ -57,9 +57,9 @@ const updateUI = async (url = '') => {
         // Check if the temperature is found to update the elements
         if (allData.temperature) {
             // Update the DOM elements
-            document.getElementById('date').innerHTML = allData.date;
-            document.getElementById('temp').innerHTML = allData.temperature;
-            document.getElementById('content').innerHTML = allData.userResponse;
+            document.getElementById('date').innerHTML = `<p><span>Date: </span>${allData.date}</p>`;
+            document.getElementById('temp').innerHTML = `<p><span>Temperature: </span>${allData.temperature}</p>`;
+            document.getElementById('content').innerHTML = `<p><span>Your Fealings: </span>${allData.userResponse}</p>`;
         }
     } catch(error) {
       console.log("error", error);
@@ -73,9 +73,9 @@ const generateData = e => {
     const zipCode = document.getElementById('zip').value.trim();
     // Value that user enter to feelings input field
     const userRes = document.getElementById('feelings').value;
-    // Check if user enter the zipcode
-    if (!zipCode.length) {
-        alert('Entre the zipcode...');
+    // Check if user enter the zipcode and fealings field
+    if (!zipCode.length || !userRes.length) {
+        alert('Fill all the fields...');
         return;
     }
    // Get data from OpenWeatherMap API
@@ -92,7 +92,7 @@ const generateData = e => {
         .then(() => updateUI('/all'))
     
     // Reset the form
-    document.getElementById('myForm').reset();
+    document.getElementById('my-form').reset();
 };
 
 // Create an event listener (click) for 'Generate' button

@@ -21,6 +21,25 @@ const getData = async (baseURL, zipCode, apikey) => {
     }
 };
 
+// Create async function to make POST request 
+const postData = async (url = '', data = {}) => {
+    const res = await fetch(url, {
+        method: 'POST', 
+        credentials: 'same-origin', 
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data) // to match the body data type to the "Content-Type" header
+    });
+    try {
+        const newData = await res.json();
+        return newData;
+    } catch(error) {
+        // Handle error
+        console.log('error', error);
+    }
+};
+
 // Function to handle click event
 const generateData = e => {
     e.preventDefault();

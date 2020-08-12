@@ -14,7 +14,15 @@ const getData = async (baseURL, zipCode, apikey) => {
     try {
         const data = await res.json();
         console.log(data);
-        return data;
+        // Check the user put valid zip code
+        // By using 'cod' and 'message' internal parameters in OpenWeatherMap API response 
+        if (data.cod != '200') { 
+            alert(`Error \n${data.message.toUpperCase()}...`);
+            return;
+        } else {
+            // return data if the zip code is vlide
+            return data;
+        } 
     } catch(error) {
         // Handle error
         console.log("error", error);
@@ -44,13 +52,15 @@ const postData = async (url = '', data = {}) => {
 const updateUI = async (url = '') => {
     const req = await fetch(url);
     try {
-      const allData = await req.json();
-      console.log(allData);
-      // Update the DOM elements
-      document.getElementById('date').innerHTML = allData.date;
-      document.getElementById('temp').innerHTML = allData.temperature;
-      document.getElementById('content').innerHTML = allData.userResponse;
-  
+        const allData = await req.json();
+            console.log(allData);
+        // Check if the temperature is found to update the elements
+        if (allData.temperature) {
+            // Update the DOM elements
+            document.getElementById('date').innerHTML = allData.date;
+            document.getElementById('temp').innerHTML = allData.temperature;
+            document.getElementById('content').innerHTML = allData.userResponse;
+        }
     } catch(error) {
       console.log("error", error);
     }
@@ -60,16 +70,22 @@ const updateUI = async (url = '') => {
 const generateData = e => {
     e.preventDefault();
     // Value that user enter to zip input field
-    const zipCode = document.getElementById('zip').value;
+    const zipCode = document.getElementById('zip').value.trim();
     // Value that user enter to feelings input field
     const userRes = document.getElementById('feelings').value;
+    // Check if user enter the zipcode
+    if (!zipCode.length) {
+        alert('Entre the zipcode...');
+        return;
+    }
    // Get data from OpenWeatherMap API
     getData(baseURL, zipCode, apikey)
         .then(userData => {
             // Make a POST request to add the API data and data entered by the user
             postData('/add', { 
                 date: newDate, 
-                temperature: userData.main.temp, 
+                // Check if the data is found to get the temperature
+                temperature: userData ? userData.main.temp : '', 
                 userResponse: userRes
             });
         }) // then Update UI elements 

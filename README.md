@@ -7,7 +7,7 @@ Asynchronous web app that uses Web API and user data to dynamically update the U
 ## Instructions
 
 In order to run the application follow these steps:
->1- Download or Clone the repository.
+1- Download or Clone the repository.
 2- Navigate to the root directory of the project.
 3- Run ``npm install`` to installs the dependencies required for the project.
 4- Run the local server using ``node server.js``

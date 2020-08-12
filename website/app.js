@@ -40,6 +40,22 @@ const postData = async (url = '', data = {}) => {
     }
 };
 
+// Create async function to update UI elements
+const updateUI = async (url = '') => {
+    const req = await fetch(url);
+    try {
+      const allData = await req.json();
+      console.log(allData);
+      // Update the DOM elements
+      document.getElementById('date').innerHTML = allData.date;
+      document.getElementById('temp').innerHTML = allData.temperature;
+      document.getElementById('content').innerHTML = allData.userResponse;
+  
+    } catch(error) {
+      console.log("error", error);
+    }
+  }
+
 // Function to handle click event
 const generateData = e => {
     e.preventDefault();
@@ -56,7 +72,8 @@ const generateData = e => {
                 temperature: userData.main.temp, 
                 userResponse: userRes
             });
-        })
+        }) // then Update UI elements 
+        .then(() => updateUI('/all'))
 };
 
 // Create an event listener (click) for 'Generate' button

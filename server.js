@@ -29,3 +29,14 @@ const server = app.listen(port, () => console.log(`Server running on localhost: 
 
 // Create GET route that returns projectData object
 app.get('/all', (req, res) => res.send(projectData));
+
+// Create POST route that adds incoming data to projectData object
+app.post('/add', (req, res) => {
+    // Receiving temperature, date and userr response from the request body
+    const {temperature, date, userResponse} = req.body;
+    // Add incoming data to projectData object
+    projectData.temperature = temperature;
+    projectData.date = date;
+    projectData.userResponse = userResponse;
+    console.log(req.body);
+});
